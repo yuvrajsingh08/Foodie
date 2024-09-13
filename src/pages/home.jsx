@@ -62,33 +62,7 @@ const Home = () => {
 
 
   const token = useSelector((state) => state?.user?.access_token);
-  const fetchOrders = async () => {
-    try {
-      const response = await fetch("/v1/orders/all-orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(errorData.error);
-        return;
-      }
-
-      const data = await response.json();
-      // console.log(data);
-      setorders(data);
-      // toast.success(data.message);
-      setlists(data.data);
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("Some error occured");
-    }
-  };
+  
 
   function logoutHandler() {
       dispatch(logout());
@@ -96,8 +70,36 @@ const Home = () => {
   }
 
   useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch("/v1/orders/all-orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          const errorData = await response.json();
+          toast.error(errorData.error);
+          return;
+        }
+
+        const data = await response.json();
+        // console.log(data);
+        setorders(data);
+        // toast.success(data.message);
+        setlists(data.data);
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error("Some error occured");
+      }
+    };
+
     fetchOrders();
-  }, []);
+  }, [token]);
 
   if (lists.length === 0) {
     return (
