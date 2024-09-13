@@ -27,7 +27,7 @@ const Login = () => {
      event.stopPropagation();
 
      const URL =
-       "/v1/rest-auth/login";
+       "https://cors-anywhere.herokuapp.com/https://test-api.achilyon.in/v1/rest-auth/login";
 
      async function submitForm() {
        try {
