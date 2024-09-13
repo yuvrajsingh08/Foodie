@@ -72,15 +72,18 @@ const Home = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch("/v1/orders/all-orders", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "http://test-api.achilyon.in/v1/orders/all-orders",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(errorData.error);

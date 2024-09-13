@@ -33,15 +33,18 @@ const Register = () => {
         async function submitForm() {
           try {
             // console.log("Sending data:", formData);
-            const response = await fetch("/v1/rest-auth/register", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "X-Requested-With": "XMLHttpRequest", // Optional header for some servers
-              },
-              body: JSON.stringify(formData),
-            });
+            const response = await fetch(
+              "http://test-api.achilyon.in/v1/rest-auth/register",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  "X-Requested-With": "XMLHttpRequest", // Optional header for some servers
+                },
+                body: JSON.stringify(formData),
+              }
+            );
 
            if (!response.ok) {
              const errorData = await response.json();
